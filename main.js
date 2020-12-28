@@ -15,24 +15,24 @@ function onGetUserMediaButtonClick() {
         .catch(error => console.error(error));
 }
 
-// function onGrabFrameButtonClick() {
-//     imageCapture.grabFrame()
-//         .then(imageBitmap => {
-//             const canvas = document.querySelector('#grabFrameCanvas');
-//             drawCanvas(canvas, imageBitmap);
-//         })
-//         .catch(error => console.error(error));
-// }
-//
-// function onTakePhotoButtonClick() {
-//     imageCapture.takePhoto()
-//         .then(blob => createImageBitmap(blob))
-//         .then(imageBitmap => {
-//             const canvas = document.querySelector('#takePhotoCanvas');
-//             drawCanvas(canvas, imageBitmap);
-//         })
-//         .catch(error => console.error(error));
-// }
+function onGrabFrameButtonClick() {
+    imageCapture.grabFrame()
+        .then(imageBitmap => {
+            const canvas = document.querySelector('#grabFrameCanvas');
+            drawCanvas(canvas, imageBitmap);
+        })
+        .catch(error => console.error(error));
+}
+
+function onTakePhotoButtonClick() {
+    imageCapture.takePhoto()
+        .then(blob => createImageBitmap(blob))
+        .then(imageBitmap => {
+            const canvas = document.querySelector('#takePhotoCanvas');
+            drawCanvas(canvas, imageBitmap);
+        })
+        .catch(error => console.error(error));
+}
 
 /* Utils */
 
@@ -50,7 +50,7 @@ function drawCanvas(canvas, img) {
         x, y, img.width * ratio, img.height * ratio);
 }
 
-// document.querySelector('video').addEventListener('play', () => {
-//     document.querySelector('#grabFrameButton').disabled = false;
-//     document.querySelector('#takePhotoButton').disabled = false;
-// });
+document.querySelector('video').addEventListener('play', () => {
+    document.querySelector('#grabFrameButton').disabled = false;
+    document.querySelector('#takePhotoButton').disabled = false;
+});
