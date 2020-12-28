@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Web Camera</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- CSS -->
-		<link rel="stylesheet" href="./index.css">
+    <title>Web Camera</title>
 
-		<!-- JS -->
-		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js" charset="utf-8"></script>
-		<script defer type="text/javascript" src="./main.js"></script>
-	</head>
-	<body>
-		<h1>Camera test - p5JS</h1>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./index.css">
 
-		<video autoplay></video>
-	</body>
+    <!-- JS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js" charset="utf-8"></script>
+    <script defer type="text/javascript" src="./main.js"></script>
+</head>
+
+<body>
+    <h1>Camera test - google dev</h1>
+
+    <div id='results'>
+        <div>
+            <video autoplay></video>
+            <button id='getUserMediaButton'>Get User Media</button>
+        </div>
+        <div>
+            <canvas id='grabFrameCanvas'></canvas>
+            <button id='grabFrameButton' disabled>Grab Frame</button>
+        </div>
+        <div>
+            <canvas id='takePhotoCanvas'></canvas>
+            <button id='takePhotoButton' disabled>Take Photo</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#getUserMediaButton').addEventListener('click', onGetUserMediaButtonClick);
+        document.querySelector('#grabFrameButton').addEventListener('click', onGrabFrameButtonClick);
+        document.querySelector('#takePhotoButton').addEventListener('click', onTakePhotoButtonClick);
+    </script>
+</body>
+
 </html>

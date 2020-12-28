@@ -2,7 +2,7 @@ var imageCapture;
 
 function onGetUserMediaButtonClick() {
     navigator.mediaDevices.getUserMedia({
-            video : true
+            video: true
         })
         .then(mediaStream => {
             document.querySelector('video').srcObject = mediaStream;
@@ -10,26 +10,26 @@ function onGetUserMediaButtonClick() {
             const track = mediaStream.getVideoTracks()[0];
             imageCapture = new ImageCapture(track);
         })
-        .catch(error => ChromeSamples.log(error));
+        .catch(error => console.error(error));
 }
 
 function onGrabFrameButtonClick() {
     imageCapture.grabFrame()
-    .then(imageBitmap => {
-        const canvas = document.querySelector('#grabFrameCanvas');
-        drawCanvas(canvas, imageBitmap);
-    })
-    .catch(error => ChromeSamples.log(error));
+        .then(imageBitmap => {
+            const canvas = document.querySelector('#grabFrameCanvas');
+            drawCanvas(canvas, imageBitmap);
+        })
+        .catch(error => console.error(error));
 }
 
 function onTakePhotoButtonClick() {
     imageCapture.takePhoto()
-    .then(blob => createImageBitmap(blob))
-    .then(imageBitmap => {
-        const canvas = document.querySelector('#takePhotoCanvas');
-        drawCanvas(canvas, imageBitmap);
-    })
-    .catch(error => ChromeSamples.log(error));
+        .then(blob => createImageBitmap(blob))
+        .then(imageBitmap => {
+            const canvas = document.querySelector('#takePhotoCanvas');
+            drawCanvas(canvas, imageBitmap);
+        })
+        .catch(error => console.error(error));
 }
 
 /* Utils */
@@ -37,7 +37,7 @@ function onTakePhotoButtonClick() {
 function drawCanvas(canvas, img) {
     canvas.width = getComputedStyle(canvas).width.split('px')[0];
     canvas.height = getComputedStyle(canvas).height.split('px')[0];
-    let ratio  = Math.min(canvas.width / img.width, canvas.height / img.height);
+    let ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
     let x = (canvas.width - img.width * ratio) / 2;
     let y = (canvas.height - img.height * ratio) / 2;
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
