@@ -37,3 +37,23 @@ h1 {
     margin: 0;
     padding: 0;
 }
+
+
+#results{
+    /* text-align: center; */
+
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-flow: column;
+
+    max-width: 80vw;
+    max-height: 80vh;
+
+    border: 2px solid red;
+}
+.basic{
+    display: flex;
+    flex-direction: column;
+}

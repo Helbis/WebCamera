@@ -19,25 +19,25 @@
     <h1>Camera test - google dev</h1>
 
     <div id='results'>
-        <div>
+        <div class="basic">
             <video autoplay></video>
-            <button id='getUserMediaButton'>Get User Media</button>
+            <button id='getUserMediaButton' onclick="onGetUserMediaButtonClick()">Get User Media</button>
         </div>
-        <div>
+        <!-- <div>
             <canvas id='grabFrameCanvas'></canvas>
             <button id='grabFrameButton' disabled>Grab Frame</button>
         </div>
         <div>
             <canvas id='takePhotoCanvas'></canvas>
             <button id='takePhotoButton' disabled>Take Photo</button>
-        </div>
+        </div> -->
     </div>
 
-    <script>
+    <!-- <script>
         document.querySelector('#getUserMediaButton').addEventListener('click', onGetUserMediaButtonClick);
         document.querySelector('#grabFrameButton').addEventListener('click', onGrabFrameButtonClick);
         document.querySelector('#takePhotoButton').addEventListener('click', onTakePhotoButtonClick);
-    </script>
+    </script> -->
 </body>
 
 </html>
