@@ -1,4 +1,5 @@
-var imageCapture;
+let imageCapture;
+
 
 function onGetUserMediaButtonClick() {
     console.log("Clicked");
