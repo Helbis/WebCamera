@@ -18,16 +18,16 @@
 <body>
     <h1>Camera test - google dev</h1>
 
-    <div id='results'>
-        <div class="basic">
+    <div class="flexBox">
+        <div class="card">
             <video autoplay></video>
             <button id='getUserMediaButton' onclick="onGetUserMediaButtonClick()">Get User Media</button>
         </div>
-        <div class="basic">
+        <div class="card">
             <canvas id='grabFrameCanvas'></canvas>
             <button id='grabFrameButton' disabled onclick="onGrabFrameButtonClick()">Grab Frame</button>
         </div>
-        <div class="basic last">
+        <div class="card last">
             <canvas id='takePhotoCanvas'></canvas>
             <button id='takePhotoButton' disabled onclick="onTakePhotoButtonClick()">Take Photo</button>
         </div>

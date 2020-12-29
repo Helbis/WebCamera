@@ -19,7 +19,7 @@ canvas, video{
     background: coral;
 }
 
-#results{
+.flexBox{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
@@ -31,7 +31,7 @@ canvas, video{
 
     border: 2px solid red;
 }
-.basic{
+.card{
     display: flex;
     flex-direction: column;
 
