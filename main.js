@@ -1,7 +1,7 @@
 let capture;
 
 function setup() {
-    createCanvas(480, 120);
+    createCanvas(800, 400);
 
     let constraints = {
         video: {
