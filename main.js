@@ -1,39 +1,31 @@
 let capture;
 
-// function setup() {
-//     createCanvas(800, 400);
-//
-//     let constraints = {
-//         video: {
-//             mandatory: {
-//                 minWidth: 1280,
-//                 minHeight: 720
-//             },
-//             optional: [{
-//                 maxFrameRate: 10
-//             }]
+// let constraints = {
+//     video: {
+//         mandatory: {
+//             minWidth: 1280,
+//             minHeight: 720
 //         },
-//         audio: true
-//     };
+//         optional: [{
+//             maxFrameRate: 10
+//         }]
+//     },
 //
-//     createCapture(constraints, stream => {
-//         console.log(stream);
-//     });
-// }
-//
-// function draw() {
-//     background(0);
-//     image(capture, 0, 0, width, width * capture.height / capture.width);
-// }
+//     audio: false
+// };
+
 
 function setup() {
     createCanvas(480, 480);
     capture = createCapture(VIDEO);
-    capture.hide();
+    capture.size(480, 480);
+    // capture.hide();
+}
+
+function savePhoto() {
+    image(capture.get(), 0, 0, width, width * capture.height / capture.width);
 }
 
 function draw() {
-    background(0);
     image(capture, 0, 0, width, width * capture.height / capture.width);
-    // filter(INVERT);
 }
