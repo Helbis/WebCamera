@@ -44,7 +44,7 @@ canvas, video{
     border: 2px solid red;
 }
 .card{
-    flex-basis: 100px;
+    flex-basis: 200px;
     flex-shrink: 1;
     flex-grow: 1;
 
