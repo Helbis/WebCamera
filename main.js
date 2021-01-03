@@ -54,18 +54,18 @@
 
     // handle events
     // play
-    btnCameraFront.addEventListener("click", () => {
-        video.play();
-        btnPlay.classList.add("is-hidden");
-        btnPause.classList.remove("is-hidden");
-    });
+    // btnCameraFront.addEventListener("click", () => {
+    //     video.play();
+    //     btnPlay.classList.add("is-hidden");
+    //     btnPause.classList.remove("is-hidden");
+    // });
 
     // pause
-    btnCameraBack.addEventListener("click", () => {
-        video.pause();
-        btnPause.classList.add("is-hidden");
-        btnPlay.classList.remove("is-hidden");
-    });
+    // btnCameraBack.addEventListener("click", () => {
+    //     video.pause();
+    //     btnPause.classList.add("is-hidden");
+    //     btnPlay.classList.remove("is-hidden");
+    // });
 
     // take screenshot
     btnGrabFrame.addEventListener("click", () => {
@@ -92,8 +92,9 @@
         // constraints.video.facingMode = useFrontCamera ? "user" : "environment";
 
         try {
-            videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
-            vidFront.srcObject = videoStreamFront;
+            // videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
+            // vidFront.srcObject = videoStreamFront;
+            alert("Trying to get back camera to work")
 
             videoStreamBack = await navigator.mediaDevices.getUserMedia(constraintsBack);
             vidBack.srcObject = videoStreamBack;
