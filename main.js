@@ -86,14 +86,14 @@
         }
     }
 
-    async function getDevices() {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        const para = document.createElement("p");
-        const node = document.createTextNode(devices);
-        para.appendChild(node);
-        const element = document.getElementById("div1");
-	    element.appendChild(para);
-    }
+    // async function getDevices() {
+    //     const devices = await navigator.mediaDevices.enumerateDevices();
+    //     const para = document.createElement("p");
+    //     const node = document.createTextNode(devices);
+    //     para.appendChild(node);
+    //     const element = document.getElementById("div1");
+	//     element.appendChild(para);
+    // }
 
     // initialize
     async function initializeCamera() {
@@ -101,12 +101,11 @@
         // constraints.video.facingMode = useFrontCamera ? "user" : "environment";
 
         try {
-            // videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
-            // vidFront.srcObject = videoStreamFront;
+            alert("Front camera")
+            videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
+            vidFront.srcObject = videoStreamFront;
 
-
-            alert("Trying to get back camera to work")
-
+            alert("Back camera")
             videoStreamBack = await navigator.mediaDevices.getUserMedia(constraintsBack);
             vidBack.srcObject = videoStreamBack;
         } catch (err) {
