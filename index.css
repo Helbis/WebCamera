@@ -22,6 +22,7 @@ h1 {
 
 canvas, video{
     background: coral;
+    max-width: 100%;
 }
 
 .flexBox{
