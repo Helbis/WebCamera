@@ -16,7 +16,7 @@
     const canvas = document.querySelector("#grabFrameCanvas");
 
     // video constraints
-    const constraints = {
+    const constraintsFront = {
         video: {
             width: {
                 min: 1280,
@@ -28,14 +28,29 @@
                 ideal: 1080,
                 max: 1440,
             },
+            facingMode: "user"
+        },
+    };
+    const constraintsBack = {
+        video: {
+            width: {
+                min: 1280,
+                ideal: 1920,
+                max: 2560,
+            },
+            height: {
+                min: 720,
+                ideal: 1080,
+                max: 1440,
+            },
+            facingMode: "environment"
         },
     };
 
-    // use front face camera
-    let useFrontCamera = true;
 
     // current video stream
-    let videoStream;
+    let videoStreamFront;
+    let videoStreamBack;
 
     // handle events
     // play
@@ -74,11 +89,14 @@
     // initialize
     async function initializeCamera() {
         stopVideoStream();
-        constraints.video.facingMode = useFrontCamera ? "user" : "environment";
+        // constraints.video.facingMode = useFrontCamera ? "user" : "environment";
 
         try {
-            videoStream = await navigator.mediaDevices.getUserMedia(constraints);
-            video.srcObject = videoStream;
+            videoStreamFront = await navigator.mediaDevices.getUserMedia(constraints);
+            vidFront.srcObject = videoStreamFront;
+
+            videoStreamBack = await navigator.mediaDevices.getUserMedia(constraintsBack);
+            vidBack.srcObject = videoStreamBack;
         } catch (err) {
             alert("Could not access the camera");
         }
