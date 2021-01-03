@@ -92,7 +92,7 @@
         // constraints.video.facingMode = useFrontCamera ? "user" : "environment";
 
         try {
-            videoStreamFront = await navigator.mediaDevices.getUserMedia(constraints);
+            videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
             vidFront.srcObject = videoStreamFront;
 
             videoStreamBack = await navigator.mediaDevices.getUserMedia(constraintsBack);
