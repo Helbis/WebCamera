@@ -20,8 +20,12 @@
 
     <div class="flexBox">
         <div class="card">
-            <video autoplay="true" id="videoInput"></video>
-            <button id='getUserMediaButton' onclick="onGetUserMediaButtonClick()">Get User Media</button>
+            <video autoplay="true" id="videoInputFront"></video>
+            <button id='getUserMediaButton' onclick="onGetFrontButtonClick()">Get front camera</button>
+        </div>
+        <div class="card">
+            <video autoplay="true" id="videoInputBack"></video>
+            <button id='getUserMediaButton' onclick="onGetBackButtonClick()">Get back camera</button>
         </div>
         <div class="card">
             <canvas id='grabFrameCanvas'></canvas>

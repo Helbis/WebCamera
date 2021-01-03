@@ -4,11 +4,50 @@ const video = document.querySelector('#videoInput');
 const canvGrabFrame = document.querySelector('#grabFrameCanvas');
 // const canvTakePhoto = document.querySelector('#takePhotoCanvas');
 
+const constraintsBackCamera = {
+  video: {
+    width: {
+      min: 1280,
+      ideal: 1920,
+      max: 2560,
+    },
+    height: {
+      min: 720,
+      ideal: 1080,
+      max: 1440,
+    },
+    facingMode: "environment",      //Back camera
+  },
+};
+const constraintsFrontCamera = {
+  video: {
+    width: {
+      min: 1280,
+      ideal: 1920,
+      max: 2560,
+    },
+    height: {
+      min: 720,
+      ideal: 1080,
+      max: 1440,
+    },
+    facingMode: "user"              // Front camera
+  },
+};
 
-function onGetUserMediaButtonClick() {
-    navigator.mediaDevices.getUserMedia({
-            video: true
+
+function onGetFrontButtonClick() {
+    navigator.mediaDevices.getUserMedia(constraintsFrontCamera)
+        .then(mediaStream => {
+            video.srcObject = mediaStream;
+
+            const track = mediaStream.getVideoTracks()[0];
+            // imageCapture = new ImageCapture(track);
         })
+        .catch(error => console.error(error));
+}
+function onGetBackButtonClick() {
+    navigator.mediaDevices.getUserMedia(constraintsBackCamera)
         .then(mediaStream => {
             video.srcObject = mediaStream;
 
