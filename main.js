@@ -86,6 +86,15 @@
         }
     }
 
+    async function getDevices() {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const para = document.createElement("p");
+        const node = document.createTextNode(devices);
+        para.appendChild(node);
+        const element = document.getElementById("div1");
+	    element.appendChild(para);
+    }
+
     // initialize
     async function initializeCamera() {
         // stopVideoStream();
@@ -94,6 +103,8 @@
         try {
             // videoStreamFront = await navigator.mediaDevices.getUserMedia(constraintsFront);
             // vidFront.srcObject = videoStreamFront;
+
+
             alert("Trying to get back camera to work")
 
             videoStreamBack = await navigator.mediaDevices.getUserMedia(constraintsBack);
