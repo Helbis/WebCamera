@@ -20,21 +20,17 @@
 
     <div class="flexBox">
         <div class="card">
-            <video autoplay="true" id="videoInputFront"></video>
+            <video autoplay id="videoInputFront"></video>
             <button id='getUserMediaButton' onclick="onGetFrontButtonClick()">Get front camera</button>
         </div>
         <div class="card">
-            <video autoplay="true" id="videoInputBack"></video>
+            <video autoplay id="videoInputBack"></video>
             <button id='getUserMediaButton' onclick="onGetBackButtonClick()">Get back camera</button>
         </div>
         <div class="card">
             <canvas id='grabFrameCanvas'></canvas>
             <button id='grabFrameButton' disabled onclick="onGrabFrameButtonClick()">Grab Frame</button>
         </div>
-        <!-- <div class="card">
-            <canvas id='takePhotoCanvas'></canvas>
-            <button id='takePhotoButton' disabled onclick="onTakePhotoButtonClick()">Take Photo</button>
-        </div> -->
     </div>
 </body>
 

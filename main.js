@@ -1,96 +1,97 @@
-let imageCapture;
-let tracks;
-const video = document.querySelector('#videoInput');
-const canvGrabFrame = document.querySelector('#grabFrameCanvas');
-// const canvTakePhoto = document.querySelector('#takePhotoCanvas');
+(function() {
+    if (
+        !"mediaDevices" in navigator ||
+        !"getUserMedia" in navigator.mediaDevices
+    ) {
+        alert("Camera API is not available in your browser");
+        return;
+    }
 
-const constraintsBackCamera = {
-  video: {
-    width: {
-      min: 1280,
-      ideal: 1920,
-      max: 2560,
-    },
-    height: {
-      min: 720,
-      ideal: 1080,
-      max: 1440,
-    },
-    facingMode: "environment",      //Back camera
-  },
-};
-const constraintsFrontCamera = {
-  video: {
-    width: {
-      min: 1280,
-      ideal: 1920,
-      max: 2560,
-    },
-    height: {
-      min: 720,
-      ideal: 1080,
-      max: 1440,
-    },
-    facingMode: "user"              // Front camera
-  },
-};
+    // get page elements
+    const video = document.querySelector("#video");
+    const btnPlay = document.querySelector("#btnPlay");
+    const btnPause = document.querySelector("#btnPause");
+    const btnScreenshot = document.querySelector("#btnScreenshot");
+    const btnChangeCamera = document.querySelector("#btnChangeCamera");
+    const screenshotsContainer = document.querySelector("#screenshots");
+    const canvas = document.querySelector("#canvas");
+    const devicesSelect = document.querySelector("#devicesSelect");
 
+    // video constraints
+    const constraints = {
+        video: {
+            width: {
+                min: 1280,
+                ideal: 1920,
+                max: 2560,
+            },
+            height: {
+                min: 720,
+                ideal: 1080,
+                max: 1440,
+            },
+        },
+    };
 
-function onGetFrontButtonClick() {
-    navigator.mediaDevices.getUserMedia(constraintsFrontCamera)
-        .then(mediaStream => {
-            video.srcObject = mediaStream;
+    // use front face camera
+    let useFrontCamera = true;
 
-            const track = mediaStream.getVideoTracks()[0];
-            // imageCapture = new ImageCapture(track);
-        })
-        .catch(error => console.error(error));
-}
-function onGetBackButtonClick() {
-    navigator.mediaDevices.getUserMedia(constraintsBackCamera)
-        .then(mediaStream => {
-            video.srcObject = mediaStream;
+    // current video stream
+    let videoStream;
 
-            const track = mediaStream.getVideoTracks()[0];
-            // imageCapture = new ImageCapture(track);
-        })
-        .catch(error => console.error(error));
-}
+    // handle events
+    // play
+    btnPlay.addEventListener("click", () => {
+        video.play();
+        btnPlay.classList.add("is-hidden");
+        btnPause.classList.remove("is-hidden");
+    });
 
-function onGrabFrameButtonClick() {
-    imageCapture.grabFrame()
-        .then(imageBitmap => {
-            drawCanvas(canvGrabFrame, imageBitmap);
-        })
-        .catch(error => console.error(error));
-}
+    // pause
+    btnPause.addEventListener("click", () => {
+        video.pause();
+        btnPause.classList.add("is-hidden");
+        btnPlay.classList.remove("is-hidden");
+    });
 
-// function onTakePhotoButtonClick() {
-//     imageCapture.takePhoto()
-//         .then(blob => createImageBitmap(blob))
-//         .then(imageBitmap => {
-//             drawCanvas(canvTakePhoto, imageBitmap);
-//         })
-//         .catch(error => console.error(error));
-// }
+    // take screenshot
+    btnScreenshot.addEventListener("click", () => {
+        const img = document.createElement("img");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        img.src = canvas.toDataURL("image/png");
+        screenshotsContainer.prepend(img);
+    });
 
-/* Utils */
+    // switch camera
+    btnChangeCamera.addEventListener("click", () => {
+        useFrontCamera = !useFrontCamera;
 
-function drawCanvas(canvas, img) {
-    canvas.width = getComputedStyle(canvas).width.split('px')[0];
-    canvas.height = getComputedStyle(canvas).height.split('px')[0];
+        initializeCamera();
+    });
 
-    let ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-    let x = (canvas.width - img.width * ratio) / 2;
-    let y = (canvas.height - img.height * ratio) / 2;
+    // stop video stream
+    function stopVideoStream() {
+        if (videoStream) {
+            videoStream.getTracks().forEach((track) => {
+                track.stop();
+            });
+        }
+    }
 
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-    canvas.getContext('2d').drawImage(
-        img, 0, 0, img.width, img.height,
-        x, y, img.width * ratio, img.height * ratio);
-}
+    // initialize
+    async function initializeCamera() {
+        stopVideoStream();
+        constraints.video.facingMode = useFrontCamera ? "user" : "environment";
 
-document.querySelector('video').addEventListener('play', () => {
-    document.querySelector('#grabFrameButton').disabled = false;
-    // document.querySelector('#takePhotoButton').disabled = false;
-});
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+            video.srcObject = videoStream;
+        } catch (err) {
+            alert("Could not access the camera");
+        }
+    }
+
+    initializeCamera();
+})();
