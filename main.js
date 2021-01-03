@@ -1,17 +1,19 @@
 let imageCapture;
+let tracks;
+const video = document.querySelector('#videoInput');
+const canvGrabFrame = document.querySelector('#grabFrameCanvas');
+// const canvTakePhoto = document.querySelector('#takePhotoCanvas');
 
 
 function onGetUserMediaButtonClick() {
-    console.log("Clicked");
-
     navigator.mediaDevices.getUserMedia({
             video: true
         })
         .then(mediaStream => {
-            document.querySelector('video').srcObject = mediaStream;
+            video.srcObject = mediaStream;
 
             const track = mediaStream.getVideoTracks()[0];
-            imageCapture = new ImageCapture(track);
+            // imageCapture = new ImageCapture(track);
         })
         .catch(error => console.error(error));
 }
@@ -19,21 +21,19 @@ function onGetUserMediaButtonClick() {
 function onGrabFrameButtonClick() {
     imageCapture.grabFrame()
         .then(imageBitmap => {
-            const canvas = document.querySelector('#grabFrameCanvas');
-            drawCanvas(canvas, imageBitmap);
+            drawCanvas(canvGrabFrame, imageBitmap);
         })
         .catch(error => console.error(error));
 }
 
-function onTakePhotoButtonClick() {
-    imageCapture.takePhoto()
-        .then(blob => createImageBitmap(blob))
-        .then(imageBitmap => {
-            const canvas = document.querySelector('#takePhotoCanvas');
-            drawCanvas(canvas, imageBitmap);
-        })
-        .catch(error => console.error(error));
-}
+// function onTakePhotoButtonClick() {
+//     imageCapture.takePhoto()
+//         .then(blob => createImageBitmap(blob))
+//         .then(imageBitmap => {
+//             drawCanvas(canvTakePhoto, imageBitmap);
+//         })
+//         .catch(error => console.error(error));
+// }
 
 /* Utils */
 
@@ -53,5 +53,5 @@ function drawCanvas(canvas, img) {
 
 document.querySelector('video').addEventListener('play', () => {
     document.querySelector('#grabFrameButton').disabled = false;
-    document.querySelector('#takePhotoButton').disabled = false;
+    // document.querySelector('#takePhotoButton').disabled = false;
 });

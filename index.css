@@ -47,8 +47,6 @@ canvas, video{
     display: flex;
     flex-direction: column;
 
-    width: 60%;
-
     margin-left: auto;
     margin-right: auto;
 
